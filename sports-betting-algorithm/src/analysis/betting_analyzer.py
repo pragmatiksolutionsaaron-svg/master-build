@@ -66,27 +66,40 @@ class BettingAnalyzer:
         if matchup.spread is None:
             return None
 
-        market_spread = matchup.spread  # Positive = team_b favored
-        model_spread = pred.predicted_spread  # Negative = team_a favored
+        market_spread = matchup.spread  # Negative = team_b favored by that many
+        model_spread = pred.predicted_spread  # Positive = team_b predicted margin
 
-        edge = abs(model_spread - market_spread)
+        # model_spread is team_b's predicted margin (positive = team_b wins by X)
+        # market_spread is negative when team_b is favored (e.g., -8.5 = team_b favored by 8.5)
+        # Edge = difference between model spread and market spread
+        # If model says team_b wins by 5.7 (model_spread=+5.7) but market says -8.5,
+        # the value is on team_a (underdog) getting +8.5 points
+        model_team_b_margin = model_spread
+        market_team_b_margin = abs(market_spread) if market_spread < 0 else -market_spread
+
+        edge = abs(model_team_b_margin - market_team_b_margin)
         if edge < self.MIN_SPREAD_EDGE:
             return None
 
-        # Determine which side has value
+        # Determine which side has value:
+        # If model says team_b wins by LESS than market expects → value on team_a (underdog)
+        # If model says team_b wins by MORE than market expects → value on team_b (favorite)
         reasoning = []
-        if model_spread < market_spread:
-            # Model favors team_a more than market does
+        if model_team_b_margin < market_team_b_margin:
+            # Model says favorite wins by less than market thinks → take the underdog
             pick = matchup.team_a.name
+            pick_label = f"{matchup.team_a.name} +{market_team_b_margin:.1f}"
             reasoning.append(
-                f"Model projects {matchup.team_a.name} spread at {model_spread:+.1f} "
-                f"vs market {market_spread:+.1f} ({edge:.1f} pts of edge)"
+                f"Model projects {matchup.team_b.name} winning by {model_team_b_margin:.1f} "
+                f"but market has them by {market_team_b_margin:.1f} ({edge:.1f} pts of edge on the underdog)"
             )
         else:
+            # Model says favorite wins by more than market thinks → take the favorite
             pick = matchup.team_b.name
+            pick_label = f"{matchup.team_b.name} -{market_team_b_margin:.1f}"
             reasoning.append(
-                f"Model projects {matchup.team_b.name} spread at {-model_spread:+.1f} "
-                f"vs market {-market_spread:+.1f} ({edge:.1f} pts of edge)"
+                f"Model projects {matchup.team_b.name} spread at -{model_team_b_margin:.1f} "
+                f"vs market -{market_team_b_margin:.1f} ({edge:.1f} pts of edge)"
             )
 
         # Add supporting reasoning
@@ -102,9 +115,8 @@ class BettingAnalyzer:
         return BetRecommendation(
             game_id=matchup.game_id,
             bet_type="spread",
-            pick=f"{pick} {market_spread:+.1f}" if pick == matchup.team_b.name
-                 else f"{pick} {-market_spread:+.1f}",
-            odds_description=f"Spread: {matchup.team_a.name} {-market_spread:+.1f} / {matchup.team_b.name} {market_spread:+.1f}",
+            pick=pick_label,
+            odds_description=f"Spread: {matchup.team_a.name} +{market_team_b_margin:.1f} / {matchup.team_b.name} -{market_team_b_margin:.1f}",
             edge=round(edge, 1),
             expected_value=round(ev, 3),
             confidence=round(confidence, 1),
