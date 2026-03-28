@@ -525,13 +525,245 @@ def run_live_mode(date_str=None):
     return teams, matchups
 
 
+def build_elite_eight_data() -> tuple[dict, list]:
+    """
+    Elite Eight matchups for March 29, 2026.
+    Real lines from sportsbook (as of March 28, 2026).
+    Teams updated with tournament wins through Sweet 16.
+    """
+    teams = {}
+
+    # ── EAST REGIONAL — Elite Eight ──
+
+    # #2 UConn (33-5) — Beat Furman R1 82-71, UCLA R2 73-57, Michigan State S16 (advanced)
+    # KenPom #10, AdjO 122.4, AdjD 94.0 — 3 tournament wins, riding momentum
+    teams["UConn"] = TeamStats(
+        name="UConn", seed=2, conference="Big East",
+        wins=33, losses=5,
+        points_per_game=77.2, field_goal_pct=0.463, three_point_pct=0.347,
+        free_throw_pct=0.740, offensive_rebounds_per_game=10.2,
+        assists_per_game=15.0, turnovers_per_game=12.1,
+        points_allowed_per_game=64.5, steals_per_game=7.0,
+        blocks_per_game=4.8, defensive_rebounds_per_game=25.5,
+        opponent_field_goal_pct=0.408, opponent_three_point_pct=0.307,
+        adjusted_offensive_efficiency=122.4, adjusted_defensive_efficiency=94.0,
+        tempo=64.7, strength_of_schedule=0.80, net_ranking=10,
+        bpi=28.3, elo_rating=1810,
+        last_10_wins=9, last_10_losses=1, win_streak=7, tournament_wins=3,
+        neutral_site_wins=9, neutral_site_losses=2,
+        vs_top_25_wins=10, vs_top_25_losses=3,
+        experience_score=3.4, depth_score=3.5, bench_points_per_game=22.0,
+    )
+
+    # #1 Duke (37-2) — Beat Siena R1 71-?, TCU R2 81-58, St. John's S16 (advanced)
+    # KenPom #3, AdjO 127.4, AdjD 89.5 — dominant run, 15-game win streak
+    teams["Duke"] = TeamStats(
+        name="Duke", seed=1, conference="ACC",
+        wins=37, losses=2,
+        points_per_game=82.4, field_goal_pct=0.466, three_point_pct=0.346,
+        free_throw_pct=0.752, offensive_rebounds_per_game=10.5,
+        assists_per_game=16.2, turnovers_per_game=10.8,
+        points_allowed_per_game=62.9, steals_per_game=7.4,
+        blocks_per_game=5.2, defensive_rebounds_per_game=26.3,
+        opponent_field_goal_pct=0.399, opponent_three_point_pct=0.305,
+        adjusted_offensive_efficiency=127.4, adjusted_defensive_efficiency=89.5,
+        tempo=65.6, strength_of_schedule=0.88, net_ranking=3,
+        bpi=37.8, elo_rating=1890,
+        last_10_wins=10, last_10_losses=0, win_streak=15, tournament_wins=3,
+        neutral_site_wins=11, neutral_site_losses=1,
+        vs_top_25_wins=16, vs_top_25_losses=2,
+        experience_score=3.0, depth_score=3.8, bench_points_per_game=25.0,
+    )
+
+    # ── MIDWEST REGIONAL — Elite Eight ──
+
+    # #6 Tennessee (27-11) — Beat Miami(OH) R1 79-56, Virginia R2 79-72, Iowa State S16 (UPSET)
+    # KenPom #14, AdjO 121.6, AdjD 94.7 — upset Iowa State in Sweet 16, riding hot
+    teams["Tennessee"] = TeamStats(
+        name="Tennessee", seed=6, conference="SEC",
+        wins=27, losses=11,
+        points_per_game=75.8, field_goal_pct=0.452, three_point_pct=0.340,
+        free_throw_pct=0.728, offensive_rebounds_per_game=10.8,
+        assists_per_game=14.2, turnovers_per_game=12.0,
+        points_allowed_per_game=67.5, steals_per_game=8.5,
+        blocks_per_game=4.0, defensive_rebounds_per_game=25.8,
+        opponent_field_goal_pct=0.415, opponent_three_point_pct=0.305,
+        adjusted_offensive_efficiency=121.6, adjusted_defensive_efficiency=94.7,
+        tempo=65.1, strength_of_schedule=0.90, net_ranking=14,
+        bpi=26.9, elo_rating=1780,
+        last_10_wins=8, last_10_losses=2, win_streak=4, tournament_wins=3,
+        neutral_site_wins=7, neutral_site_losses=3,
+        vs_top_25_wins=8, vs_top_25_losses=7,
+        experience_score=3.4, depth_score=3.2, bench_points_per_game=19.5,
+    )
+
+    # #1 Michigan (36-3) — Beat Howard R1 101-80, Saint Louis R2 95-72, Alabama S16 (advanced)
+    # KenPom #1, AdjO 127.8, AdjD 89.9 — dominant, scoring 95+ in both R2/S16
+    teams["Michigan"] = TeamStats(
+        name="Michigan", seed=1, conference="Big Ten",
+        wins=36, losses=3,
+        points_per_game=84.8, field_goal_pct=0.477, three_point_pct=0.366,
+        free_throw_pct=0.758, offensive_rebounds_per_game=10.0,
+        assists_per_game=17.2, turnovers_per_game=11.0,
+        points_allowed_per_game=64.5, steals_per_game=7.5,
+        blocks_per_game=4.5, defensive_rebounds_per_game=25.8,
+        opponent_field_goal_pct=0.395, opponent_three_point_pct=0.308,
+        adjusted_offensive_efficiency=127.8, adjusted_defensive_efficiency=89.9,
+        tempo=70.9, strength_of_schedule=0.88, net_ranking=1,
+        bpi=37.8, elo_rating=1900,
+        last_10_wins=10, last_10_losses=0, win_streak=7, tournament_wins=3,
+        neutral_site_wins=10, neutral_site_losses=1,
+        vs_top_25_wins=17, vs_top_25_losses=2,
+        experience_score=3.2, depth_score=3.6, bench_points_per_game=24.0,
+    )
+
+    # ── SOUTH REGIONAL — Elite Eight ──
+
+    # #9 Iowa (26-12) — Beat Clemson R1 67-61, #1 Florida R2 73-72, Nebraska S16 (UPSET)
+    # KenPom ~#30, upset machine — took down #1 seed + #4 seed back to back
+    teams["Iowa"] = TeamStats(
+        name="Iowa", seed=9, conference="Big Ten",
+        wins=26, losses=12,
+        points_per_game=75.0, field_goal_pct=0.450, three_point_pct=0.345,
+        free_throw_pct=0.755, offensive_rebounds_per_game=9.8,
+        assists_per_game=14.0, turnovers_per_game=11.5,
+        points_allowed_per_game=70.0, steals_per_game=7.0,
+        blocks_per_game=3.5, defensive_rebounds_per_game=24.5,
+        opponent_field_goal_pct=0.425, opponent_three_point_pct=0.325,
+        adjusted_offensive_efficiency=117.0, adjusted_defensive_efficiency=96.0,
+        tempo=67.0, strength_of_schedule=0.82, net_ranking=30,
+        bpi=21.0, elo_rating=1770,
+        last_10_wins=8, last_10_losses=2, win_streak=4, tournament_wins=3,
+        neutral_site_wins=6, neutral_site_losses=2,
+        vs_top_25_wins=7, vs_top_25_losses=7,
+        experience_score=3.5, depth_score=3.0, bench_points_per_game=19.0,
+    )
+
+    # #3 Illinois (29-8) — Beat Penn R1 105-70, VCU R2 76-55, Houston S16 (advanced)
+    # KenPom #6, AdjO #1 (133.9) — historic offense, beat Houston's #5 defense
+    teams["Illinois"] = TeamStats(
+        name="Illinois", seed=3, conference="Big Ten",
+        wins=29, losses=8,
+        points_per_game=84.4, field_goal_pct=0.475, three_point_pct=0.370,
+        free_throw_pct=0.750, offensive_rebounds_per_game=11.5,
+        assists_per_game=16.0, turnovers_per_game=11.2,
+        points_allowed_per_game=71.0, steals_per_game=6.5,
+        blocks_per_game=4.2, defensive_rebounds_per_game=24.5,
+        opponent_field_goal_pct=0.425, opponent_three_point_pct=0.322,
+        adjusted_offensive_efficiency=133.9, adjusted_defensive_efficiency=97.0,
+        tempo=68.0, strength_of_schedule=0.88, net_ranking=6,
+        bpi=36.9, elo_rating=1850,
+        last_10_wins=8, last_10_losses=2, win_streak=4, tournament_wins=3,
+        neutral_site_wins=8, neutral_site_losses=2,
+        vs_top_25_wins=10, vs_top_25_losses=5,
+        experience_score=3.0, depth_score=3.4, bench_points_per_game=23.0,
+    )
+
+    # ── WEST REGIONAL — Elite Eight ──
+
+    # #2 Purdue (32-8) — Beat Queens R1 104-71, Miami R2 79-69, Texas S16 (advanced)
+    # KenPom #8, AdjO #1 (133.5) — Braden Smith all-time assists leader
+    teams["Purdue"] = TeamStats(
+        name="Purdue", seed=2, conference="Big Ten",
+        wins=32, losses=8,
+        points_per_game=82.0, field_goal_pct=0.522, three_point_pct=0.385,
+        free_throw_pct=0.780, offensive_rebounds_per_game=10.2,
+        assists_per_game=18.5, turnovers_per_game=10.5,
+        points_allowed_per_game=64.0, steals_per_game=6.8,
+        blocks_per_game=4.5, defensive_rebounds_per_game=25.5,
+        opponent_field_goal_pct=0.420, opponent_three_point_pct=0.320,
+        adjusted_offensive_efficiency=133.5, adjusted_defensive_efficiency=97.0,
+        tempo=67.5, strength_of_schedule=0.90, net_ranking=8,
+        bpi=36.5, elo_rating=1860,
+        last_10_wins=10, last_10_losses=0, win_streak=9, tournament_wins=3,
+        neutral_site_wins=11, neutral_site_losses=0,
+        vs_top_25_wins=11, vs_top_25_losses=5,
+        experience_score=3.8, depth_score=3.5, bench_points_per_game=22.0,
+    )
+
+    # #1 Arizona (37-2) — Beat Long Island R1 92-58, Utah St R2 78-66, Arkansas S16 (advanced)
+    # KenPom #3, AdjO #4 (127.9), AdjD #2 (88.8) — elite both ends
+    teams["Arizona"] = TeamStats(
+        name="Arizona", seed=1, conference="Big 12",
+        wins=37, losses=2,
+        points_per_game=89.9, field_goal_pct=0.547, three_point_pct=0.363,
+        free_throw_pct=0.745, offensive_rebounds_per_game=12.5,
+        assists_per_game=17.0, turnovers_per_game=11.0,
+        points_allowed_per_game=62.5, steals_per_game=7.0,
+        blocks_per_game=5.0, defensive_rebounds_per_game=27.0,
+        opponent_field_goal_pct=0.390, opponent_three_point_pct=0.311,
+        adjusted_offensive_efficiency=127.9, adjusted_defensive_efficiency=88.8,
+        tempo=69.5, strength_of_schedule=0.92, net_ranking=3,
+        bpi=39.1, elo_rating=1905,
+        last_10_wins=10, last_10_losses=0, win_streak=17, tournament_wins=3,
+        neutral_site_wins=12, neutral_site_losses=0,
+        vs_top_25_wins=17, vs_top_25_losses=2,
+        experience_score=3.0, depth_score=3.8, bench_points_per_game=26.0,
+    )
+
+    # ── ELITE EIGHT MATCHUPS — MARCH 29, 2026 ──
+    # Real lines from sportsbook as of March 28, 2026
+    matchups = [
+        # EAST REGIONAL — Washington D.C.
+        Matchup(
+            game_id="elite8_east",
+            team_a=teams["UConn"],
+            team_b=teams["Duke"],
+            round_name="Elite Eight — East Regional",
+            game_time="Saturday, March 29, 2026 — 4:05 PM ET",
+            venue="Capital One Arena, Washington D.C.",
+            spread=-5.0,  # Duke favored by 5
+            over_under=134.0,
+            team_a_moneyline=180,
+            team_b_moneyline=-220,
+        ),
+        # MIDWEST REGIONAL — Chicago
+        Matchup(
+            game_id="elite8_midwest",
+            team_a=teams["Tennessee"],
+            team_b=teams["Michigan"],
+            round_name="Elite Eight — Midwest Regional",
+            game_time="Saturday, March 29, 2026 — 1:15 PM ET",
+            venue="United Center, Chicago, IL",
+            spread=-7.5,  # Michigan favored by 7.5
+            over_under=146.5,
+            team_a_moneyline=260,
+            team_b_moneyline=-335,
+        ),
+        # SOUTH REGIONAL — Houston
+        Matchup(
+            game_id="elite8_south",
+            team_a=teams["Iowa"],
+            team_b=teams["Illinois"],
+            round_name="Elite Eight — South Regional",
+            game_time="Sunday, March 29, 2026 — 5:09 PM ET",
+            venue="Toyota Center, Houston, TX",
+            spread=-7.0,  # Illinois favored by 7
+            over_under=139.5,
+            team_a_moneyline=255,
+            team_b_moneyline=-325,
+        ),
+        # WEST REGIONAL — San Jose
+        Matchup(
+            game_id="elite8_west",
+            team_a=teams["Purdue"],
+            team_b=teams["Arizona"],
+            round_name="Elite Eight — West Regional",
+            game_time="Sunday, March 29, 2026 — 7:49 PM ET",
+            venue="SAP Center, San Jose, CA",
+            spread=-5.5,  # Arizona favored by 5.5
+            over_under=153.5,
+            team_a_moneyline=205,
+            team_b_moneyline=-255,
+        ),
+    ]
+
+    return teams, matchups
+
+
 def build_sample_data() -> tuple[dict, list]:
-    """Combine Thursday and Friday Sweet 16 data for full predictions."""
-    thu_teams, thu_matchups = build_thursday_data()
-    fri_teams, fri_matchups = build_friday_data()
-    all_teams = {**thu_teams, **fri_teams}
-    all_matchups = thu_matchups + fri_matchups
-    return all_teams, all_matchups
+    """Return Elite Eight data (current round)."""
+    return build_elite_eight_data()
 
 
 def run_config_mode(teams_file, matchups_file):
