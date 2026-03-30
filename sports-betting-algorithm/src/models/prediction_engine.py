@@ -377,6 +377,42 @@ class CompositePredictor:
             'momentum': momentum_weight,
         }
 
+    # Tournament round multipliers — later rounds amplify favorite margins
+    # Based on 2026 backtest: favorites won by avg 14.8 pts in E8 vs model's 4.1
+    ROUND_MARGIN_MULTIPLIER = {
+        'First Round': 1.0,
+        'Second Round': 1.0,
+        'Sweet 16': 1.15,
+        'Elite Eight': 1.40,
+        'Final Four': 1.50,
+        'Championship': 1.50,
+    }
+
+    # Tournament total adjustments — defense tightens in later rounds
+    # Backtest: model totals ran +17.5 pts high in E8
+    ROUND_TOTAL_ADJUSTMENT = {
+        'First Round': -2.0,
+        'Second Round': -3.0,
+        'Sweet 16': -5.0,
+        'Elite Eight': -8.0,
+        'Final Four': -10.0,
+        'Championship': -10.0,
+    }
+
+    def _get_round_adjustments(self, round_name: str) -> tuple[float, float]:
+        """Get margin multiplier and total adjustment for tournament round."""
+        margin_mult = 1.0
+        total_adj = 0.0
+        for key, val in self.ROUND_MARGIN_MULTIPLIER.items():
+            if key.lower() in round_name.lower():
+                margin_mult = val
+                break
+        for key, val in self.ROUND_TOTAL_ADJUSTMENT.items():
+            if key.lower() in round_name.lower():
+                total_adj = val
+                break
+        return margin_mult, total_adj
+
     def predict_game(self, matchup: Matchup) -> GamePrediction:
         """Generate a complete prediction for a single matchup."""
         team_a = matchup.team_a
@@ -396,18 +432,28 @@ class CompositePredictor:
             self.weights['momentum'] * momentum_prob_a
         )
 
-        # Calibrate to avoid extreme probabilities (shrink toward 50%)
-        composite_prob_a = self._calibrate(composite_prob_a)
+        # Calibrate — reduced shrinkage (was 0.05, now 0.02)
+        # Backtest showed favorites are undervalued with heavy shrinkage
+        composite_prob_a = self._calibrate(composite_prob_a, shrinkage=0.02)
         composite_prob_b = 1.0 - composite_prob_a
 
         # Adjust predicted scores based on composite probability
         eff_margin = score_a - score_b
         composite_margin = self._prob_to_margin(composite_prob_a)
 
+        # Apply tournament round margin multiplier
+        # Later rounds: favorites win by MORE than regular-season metrics suggest
+        margin_mult, total_adj = self._get_round_adjustments(matchup.round_name)
+        composite_margin = composite_margin * margin_mult
+
         # Blend efficiency scores with composite margin
         avg_total = (score_a + score_b) / 2.0
         adj_score_a = avg_total + composite_margin / 2.0
         adj_score_b = avg_total - composite_margin / 2.0
+
+        # Apply tournament total adjustment (defense tightens in later rounds)
+        adj_score_a += total_adj / 2.0
+        adj_score_b += total_adj / 2.0
 
         # Model agreement (how similar are model outputs)
         probs = [eff_prob_a, elo_prob_a, momentum_prob_a, seed_prob_a]

@@ -761,9 +761,135 @@ def build_elite_eight_data() -> tuple[dict, list]:
     return teams, matchups
 
 
+def build_final_four_data() -> tuple[dict, list]:
+    """
+    Final Four matchups — April 4, 2026 at Lucas Oil Stadium, Indianapolis.
+    Teams updated through Elite Eight results.
+    Lines TBD — using projected lines based on market movement.
+    """
+    teams = {}
+
+    # #2 UConn (34-5) — Beat Duke 73-72 in Elite 8 (1-point upset!)
+    # Tournament: 82-71 Furman, 73-57 UCLA, beat MSU (S16), 73-72 Duke (E8)
+    # Peaked at the right time, clutch gene activated
+    teams["UConn"] = TeamStats(
+        name="UConn", seed=2, conference="Big East",
+        wins=34, losses=5,
+        points_per_game=77.2, field_goal_pct=0.463, three_point_pct=0.347,
+        free_throw_pct=0.740, offensive_rebounds_per_game=10.2,
+        assists_per_game=15.0, turnovers_per_game=12.1,
+        points_allowed_per_game=64.5, steals_per_game=7.0,
+        blocks_per_game=4.8, defensive_rebounds_per_game=25.5,
+        opponent_field_goal_pct=0.408, opponent_three_point_pct=0.307,
+        adjusted_offensive_efficiency=122.4, adjusted_defensive_efficiency=94.0,
+        tempo=64.7, strength_of_schedule=0.80, net_ranking=10,
+        bpi=28.3, elo_rating=1830,
+        last_10_wins=10, last_10_losses=0, win_streak=8, tournament_wins=4,
+        neutral_site_wins=10, neutral_site_losses=2,
+        vs_top_25_wins=11, vs_top_25_losses=3,
+        experience_score=3.4, depth_score=3.5, bench_points_per_game=22.0,
+    )
+
+    # #1 Michigan (37-3) — Beat Tennessee 95-62 in Elite 8 (33-pt blowout)
+    # Tournament: 101-80, 95-72, beat Alabama (S16), 95-62 (E8)
+    # Scoring 95+ in 3 of 4 tournament games. Absolute machine.
+    teams["Michigan"] = TeamStats(
+        name="Michigan", seed=1, conference="Big Ten",
+        wins=37, losses=3,
+        points_per_game=84.8, field_goal_pct=0.477, three_point_pct=0.366,
+        free_throw_pct=0.758, offensive_rebounds_per_game=10.0,
+        assists_per_game=17.2, turnovers_per_game=11.0,
+        points_allowed_per_game=64.5, steals_per_game=7.5,
+        blocks_per_game=4.5, defensive_rebounds_per_game=25.8,
+        opponent_field_goal_pct=0.395, opponent_three_point_pct=0.308,
+        adjusted_offensive_efficiency=127.8, adjusted_defensive_efficiency=89.9,
+        tempo=70.9, strength_of_schedule=0.88, net_ranking=1,
+        bpi=37.8, elo_rating=1920,
+        last_10_wins=10, last_10_losses=0, win_streak=8, tournament_wins=4,
+        neutral_site_wins=11, neutral_site_losses=1,
+        vs_top_25_wins=18, vs_top_25_losses=2,
+        experience_score=3.2, depth_score=3.6, bench_points_per_game=24.0,
+    )
+
+    # #3 Illinois (30-8) — Beat Iowa 71-59 in Elite 8
+    # Tournament: 105-70, 76-55, beat Houston (S16), 71-59 (E8)
+    # #1 offense in the nation. Defense tightened in E8 (held Iowa to 59).
+    teams["Illinois"] = TeamStats(
+        name="Illinois", seed=3, conference="Big Ten",
+        wins=30, losses=8,
+        points_per_game=84.4, field_goal_pct=0.475, three_point_pct=0.370,
+        free_throw_pct=0.750, offensive_rebounds_per_game=11.5,
+        assists_per_game=16.0, turnovers_per_game=11.2,
+        points_allowed_per_game=71.0, steals_per_game=6.5,
+        blocks_per_game=4.2, defensive_rebounds_per_game=24.5,
+        opponent_field_goal_pct=0.425, opponent_three_point_pct=0.322,
+        adjusted_offensive_efficiency=133.9, adjusted_defensive_efficiency=97.0,
+        tempo=68.0, strength_of_schedule=0.88, net_ranking=6,
+        bpi=36.9, elo_rating=1865,
+        last_10_wins=9, last_10_losses=1, win_streak=5, tournament_wins=4,
+        neutral_site_wins=9, neutral_site_losses=2,
+        vs_top_25_wins=11, vs_top_25_losses=5,
+        experience_score=3.0, depth_score=3.4, bench_points_per_game=23.0,
+    )
+
+    # #1 Arizona (38-2) — Beat Purdue 79-64 in Elite 8 (15-pt win)
+    # Tournament: 92-58, 78-66, beat Arkansas (S16), 79-64 (E8)
+    # Best two-way team left. Elite defense + top-5 offense.
+    teams["Arizona"] = TeamStats(
+        name="Arizona", seed=1, conference="Big 12",
+        wins=38, losses=2,
+        points_per_game=89.9, field_goal_pct=0.547, three_point_pct=0.363,
+        free_throw_pct=0.745, offensive_rebounds_per_game=12.5,
+        assists_per_game=17.0, turnovers_per_game=11.0,
+        points_allowed_per_game=62.5, steals_per_game=7.0,
+        blocks_per_game=5.0, defensive_rebounds_per_game=27.0,
+        opponent_field_goal_pct=0.390, opponent_three_point_pct=0.311,
+        adjusted_offensive_efficiency=127.9, adjusted_defensive_efficiency=88.8,
+        tempo=69.5, strength_of_schedule=0.92, net_ranking=3,
+        bpi=39.1, elo_rating=1920,
+        last_10_wins=10, last_10_losses=0, win_streak=18, tournament_wins=4,
+        neutral_site_wins=13, neutral_site_losses=0,
+        vs_top_25_wins=18, vs_top_25_losses=2,
+        experience_score=3.0, depth_score=3.8, bench_points_per_game=26.0,
+    )
+
+    # ── FINAL FOUR — APRIL 4, 2026, LUCAS OIL STADIUM, INDIANAPOLIS ──
+    # Lines are projected — update with real sportsbook lines when available
+    matchups = [
+        # SEMIFINAL 1: East vs Midwest
+        Matchup(
+            game_id="final_four_1",
+            team_a=teams["UConn"],
+            team_b=teams["Michigan"],
+            round_name="Final Four — National Semifinal",
+            game_time="Saturday, April 4, 2026 — 6:09 PM ET (CBS)",
+            venue="Lucas Oil Stadium, Indianapolis, IN",
+            spread=-6.5,   # Michigan favored by 6.5 (projected)
+            over_under=141.5,
+            team_a_moneyline=220,
+            team_b_moneyline=-275,
+        ),
+        # SEMIFINAL 2: South vs West
+        Matchup(
+            game_id="final_four_2",
+            team_a=teams["Illinois"],
+            team_b=teams["Arizona"],
+            round_name="Final Four — National Semifinal",
+            game_time="Saturday, April 4, 2026 — 8:49 PM ET (CBS)",
+            venue="Lucas Oil Stadium, Indianapolis, IN",
+            spread=-4.5,   # Arizona favored by 4.5 (projected)
+            over_under=148.5,
+            team_a_moneyline=170,
+            team_b_moneyline=-200,
+        ),
+    ]
+
+    return teams, matchups
+
+
 def build_sample_data() -> tuple[dict, list]:
-    """Return Elite Eight data (current round)."""
-    return build_elite_eight_data()
+    """Return Final Four data (current round)."""
+    return build_final_four_data()
 
 
 def run_config_mode(teams_file, matchups_file):
