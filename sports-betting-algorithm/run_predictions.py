@@ -865,10 +865,10 @@ def build_final_four_data() -> tuple[dict, list]:
             round_name="Final Four — National Semifinal",
             game_time="Saturday, April 4, 2026 — 6:09 PM ET (CBS)",
             venue="Lucas Oil Stadium, Indianapolis, IN",
-            spread=-3.5,   # Illinois favored by 3.5 (projected)
-            over_under=140.5,
-            team_a_moneyline=-165,
-            team_b_moneyline=140,
+            spread=2.0,   # Illinois favored by 2 (negative spread from team_a perspective)
+            over_under=139.5,
+            team_a_moneyline=-135,
+            team_b_moneyline=115,
         ),
         # SEMIFINAL 2: West (Arizona) vs Midwest (Michigan)
         Matchup(
@@ -878,10 +878,10 @@ def build_final_four_data() -> tuple[dict, list]:
             round_name="Final Four — National Semifinal",
             game_time="Saturday, April 4, 2026 — 8:49 PM ET (CBS)",
             venue="Lucas Oil Stadium, Indianapolis, IN",
-            spread=-1.5,   # Arizona slight favorite (projected)
-            over_under=147.5,
-            team_a_moneyline=110,
-            team_b_moneyline=-130,
+            spread=1.5,   # Michigan favored by 1.5
+            over_under=158.0,
+            team_a_moneyline=-120,
+            team_b_moneyline=100,
         ),
     ]
 
