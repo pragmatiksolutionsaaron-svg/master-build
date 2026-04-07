@@ -888,9 +888,80 @@ def build_final_four_data() -> tuple[dict, list]:
     return teams, matchups
 
 
+def build_championship_data() -> tuple[dict, list]:
+    """
+    National Championship — April 6, 2026, Lucas Oil Stadium, Indianapolis.
+    UConn vs Michigan. Real sportsbook lines.
+    """
+    teams = {}
+
+    # #2 UConn (35-5) — Beat Illinois 71-62 in Final Four
+    # Tournament run: Furman 82-71, UCLA 73-57, MSU S16, Duke E8 73-72, Illinois FF 71-62
+    # Tarris Reed Jr: 20.8 PPG, 13.0 RPG in tournament. Former Michigan player.
+    # Dan Hurley seeking 3rd title in 4 years.
+    teams["UConn"] = TeamStats(
+        name="UConn", seed=2, conference="Big East",
+        wins=35, losses=5,
+        points_per_game=77.2, field_goal_pct=0.463, three_point_pct=0.347,
+        free_throw_pct=0.740, offensive_rebounds_per_game=10.2,
+        assists_per_game=15.0, turnovers_per_game=12.1,
+        points_allowed_per_game=64.5, steals_per_game=7.0,
+        blocks_per_game=4.8, defensive_rebounds_per_game=25.5,
+        opponent_field_goal_pct=0.408, opponent_three_point_pct=0.307,
+        adjusted_offensive_efficiency=122.4, adjusted_defensive_efficiency=94.0,
+        tempo=64.7, strength_of_schedule=0.80, net_ranking=10,
+        bpi=28.3, elo_rating=1845,
+        last_10_wins=10, last_10_losses=0, win_streak=9, tournament_wins=5,
+        neutral_site_wins=11, neutral_site_losses=2,
+        vs_top_25_wins=12, vs_top_25_losses=3,
+        experience_score=3.4, depth_score=3.5, bench_points_per_game=22.0,
+    )
+
+    # #1 Michigan (39-3) — Beat Arizona 91-73 in Final Four
+    # Tournament run: Howard 101-80, SLU 95-72, Alabama 90-77, Tennessee 95-62, Arizona 91-73
+    # 5 consecutive double-digit wins. Scoring 90+ in 4 of 5 games.
+    # Yaxel Lendeborg (15.1 PPG) has MCL/ankle sprain — limited vs Arizona.
+    # Aday Mara: career-high 26 pts vs Arizona when Lendeborg was limited.
+    # Goldin: 22.5 PPG last 6 games. Tre Donaldson clutch playmaker.
+    teams["Michigan"] = TeamStats(
+        name="Michigan", seed=1, conference="Big Ten",
+        wins=39, losses=3,
+        points_per_game=84.8, field_goal_pct=0.477, three_point_pct=0.366,
+        free_throw_pct=0.758, offensive_rebounds_per_game=10.0,
+        assists_per_game=17.2, turnovers_per_game=11.0,
+        points_allowed_per_game=64.5, steals_per_game=7.5,
+        blocks_per_game=4.5, defensive_rebounds_per_game=25.8,
+        opponent_field_goal_pct=0.395, opponent_three_point_pct=0.308,
+        adjusted_offensive_efficiency=127.8, adjusted_defensive_efficiency=89.9,
+        tempo=70.9, strength_of_schedule=0.88, net_ranking=1,
+        bpi=37.8, elo_rating=1930,
+        last_10_wins=10, last_10_losses=0, win_streak=9, tournament_wins=5,
+        neutral_site_wins=12, neutral_site_losses=1,
+        vs_top_25_wins=19, vs_top_25_losses=2,
+        experience_score=3.2, depth_score=3.6, bench_points_per_game=24.0,
+    )
+
+    matchups = [
+        Matchup(
+            game_id="championship",
+            team_a=teams["UConn"],
+            team_b=teams["Michigan"],
+            round_name="Championship — National Title Game",
+            game_time="Monday, April 6, 2026 — 8:50 PM ET (TBS)",
+            venue="Lucas Oil Stadium, Indianapolis, IN",
+            spread=-6.5,   # Michigan favored by 6.5
+            over_under=146.5,
+            team_a_moneyline=256,
+            team_b_moneyline=-315,
+        ),
+    ]
+
+    return teams, matchups
+
+
 def build_sample_data() -> tuple[dict, list]:
-    """Return Final Four data (current round)."""
-    return build_final_four_data()
+    """Return current round data."""
+    return build_championship_data()
 
 
 def run_config_mode(teams_file, matchups_file):
