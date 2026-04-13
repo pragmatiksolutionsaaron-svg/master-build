@@ -1,0 +1,19 @@
+{
+  "description": "Matchup configuration with betting lines. Update team names to match teams.json.",
+  "matchups": [
+    {
+      "game_id": "game_1",
+      "team_a": "Team A Name",
+      "team_b": "Team B Name",
+      "round_name": "Final Four",
+      "game_time": "March 28, 2026 — 6:00 PM ET",
+      "venue": "Arena Name, City, State",
+      "spread": -2.5,
+      "over_under": 140.0,
+      "team_a_moneyline": 120,
+      "team_b_moneyline": -140
+    }
+  ],
+  "spread_convention": "Negative = team_b favored (e.g., -2.5 means team_b favored by 2.5)",
+  "moneyline_convention": "Standard American odds (positive = underdog, negative = favorite)"
+}

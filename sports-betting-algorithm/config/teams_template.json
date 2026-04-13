@@ -1,0 +1,49 @@
+{
+  "description": "Team statistics configuration. Update with real data for accurate predictions.",
+  "data_sources": [
+    "KenPom (kenpom.com) - Adjusted efficiency metrics",
+    "ESPN (espn.com/mens-college-basketball) - Team stats, records",
+    "Torvik (barttorvik.com) - Free alternative to KenPom",
+    "NCAA NET Rankings (ncaa.com) - Official tournament rankings"
+  ],
+  "teams": [
+    {
+      "name": "Team Name",
+      "seed": 1,
+      "conference": "Conference",
+      "wins": 30,
+      "losses": 5,
+      "points_per_game": 78.0,
+      "field_goal_pct": 0.460,
+      "three_point_pct": 0.350,
+      "free_throw_pct": 0.740,
+      "offensive_rebounds_per_game": 10.0,
+      "assists_per_game": 15.0,
+      "turnovers_per_game": 11.5,
+      "points_allowed_per_game": 65.0,
+      "steals_per_game": 7.0,
+      "blocks_per_game": 4.0,
+      "defensive_rebounds_per_game": 25.0,
+      "opponent_field_goal_pct": 0.400,
+      "opponent_three_point_pct": 0.310,
+      "adjusted_offensive_efficiency": 115.0,
+      "adjusted_defensive_efficiency": 95.0,
+      "tempo": 67.5,
+      "strength_of_schedule": 0.75,
+      "net_ranking": 10,
+      "bpi": 20.0,
+      "elo_rating": 1700,
+      "last_10_wins": 8,
+      "last_10_losses": 2,
+      "win_streak": 5,
+      "tournament_wins": 3,
+      "neutral_site_wins": 5,
+      "neutral_site_losses": 2,
+      "vs_top_25_wins": 6,
+      "vs_top_25_losses": 3,
+      "experience_score": 3.0,
+      "depth_score": 3.0,
+      "bench_points_per_game": 20.0
+    }
+  ]
+}
